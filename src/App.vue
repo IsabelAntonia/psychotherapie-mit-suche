@@ -204,4 +204,8 @@ li {
 #footer {
   background-color: #fff7f8;
 }
+
+.makeTextRed {
+  color: red;
+}
 </style>

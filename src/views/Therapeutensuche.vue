@@ -399,9 +399,7 @@ export default {
 </script>
 
 <style>
-.makeTextRed {
-  color: red;
-}
+
 .moreMarginBottom {
   margin-bottom: 6vh;
 }
