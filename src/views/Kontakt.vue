@@ -3,10 +3,15 @@
 	    <div class="background-image"></div>
 	
 	    <div class="content">
-	      <h2>Kontakt</h2>
+        <div class="hidden-sm-and-up">
+        <br />
+        <br />
+      </div>
+	      <h2>Kontaktformular</h2>
 	
+<!--
 	      <p>Kontaktinformationen:</p>
-	      <ol>
+	      <ol class="marginBottom">
 	        <li>Psychotherapeutische Praxis Barbara Seidl</li>
 	        <li>Telefon: 0176 56992742</li>
 	        <li>Adresse: Iblherstraße 18, 82380 Peißenberg</li>
@@ -16,23 +21,25 @@
 	        </li>
 	      </ol>
 	
-	      <div class="row">
+	      <div class="row marginBottom">
 	        <v-icon class="col-1">info</v-icon>
-	        <p class="withBorder col-10" style="width:100%">
+	        <p class="withBorder col-10">
 	          Erstanfragen zur Psychotherapie bitte ich immer persönlich während der
 	          telefonischen Sprechzeiten an mich zu richten oder alternativ dieses
 	          Kontaktformular zu nutzen.
 	        </p>
 	      </div>
+-->
 	
-	      <div class="twoParagraphs">
+	      <div>
 	        <v-form
 	          ref="form"
 	          lazy-validation
 	          id="contact-form"
 	          v-on:submit.prevent="onSubmit"
+	          style="display: flex; flex-direction: column;"
 	        >
-	          <p class="increaseFontSize">Kontaktformular:</p>
+	       
 	
 	          <div class="row">
 	            <input type="hidden" name="contact_number" />
@@ -75,7 +82,7 @@
 	            rows="12"
 	          ></v-textarea>
 	
-	          <p class="smallText">
+	          <p class="marginBottom">
 	            Mit Senden der Anfrage willigen Sie ein von mir kontaktiert zu
 	            werden. Es gelten unsere
 	            <router-link to="/datenschutzerklärung"
@@ -83,13 +90,15 @@
 	            >
 	          </p>
 	
-	          <v-btn color="primary" type="submit">Nachricht senden</v-btn>
+	          <v-btn style="align-self: center" color="primary" type="submit">Nachricht senden</v-btn>
 	        </v-form>
 	
-	        <p id="alert" v-if="messageSent">
+	        <p style="text-align: center !important" id="alert" v-if="messageSent">
 	          Ihre Nachricht wurde erfolgreich gesendet!
 	        </p>
 	      </div>
+	       <br />
+      <br />
 	    </div>
 	  </div>
 	</template>

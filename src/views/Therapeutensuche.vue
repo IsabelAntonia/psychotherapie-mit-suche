@@ -3,6 +3,10 @@
     <div class="background-image"></div>
 
     <div class="content" style="display: flex; flex-direction: column;">
+       <div class="hidden-sm-and-up">
+        <br />
+        <br />
+      </div>
       <h2 class="hidden-sm-and-up">Suche</h2>
       <h2 class="hidden-xs-only">Therapeutensuche</h2>
 
@@ -140,9 +144,11 @@
         >Suchen</v-btn
       >
 
-      <div class="makeTextRed" v-if="wrongInput">
+      <div class="makeTextRed mt-2" v-if="wrongInput">
         <p class="text-center">Bitte überprüfen Sie Ihre Adresseingabe.</p>
       </div>
+       <br />
+      <br />
     </div>
   </div>
 </template>

@@ -3,6 +3,10 @@
     <div class="background-image"></div>
 
     <div class="content">
+       <div class="hidden-sm-and-up">
+        <br />
+        <br />
+      </div>
       <div v-if="loading" class="loader" style="text-align:center">
         <div class="lds-default">
           <div></div>
@@ -21,7 +25,7 @@
       </div>
 
       <div v-else>
-        <div v-if="Results">
+        <div v-if="Results" style="display: flex; flex-direction: column;">
           <h2>Ihre Ergebnisse</h2>
 
           <div class="table-responsive">
@@ -54,13 +58,13 @@
             </table>
           </div>
 
-          <v-btn large color="primary" v-on:click="moveOn7"
+          <v-btn style="align-self:center" large color="primary" v-on:click="moveOn7"
             >Zurück zur Suche</v-btn
           >
         </div>
 
-        <div v-else>
-          <p class="center">
+        <div v-else style="display: flex; flex-direction: column; align-items: center;">
+          <p class="mb-2">
             Keine Ergebnisse. Bitte ändern Sie Ihre Sucheinstellungen.
           </p>
           <v-btn large color="primary" v-on:click="moveOn7"
@@ -68,6 +72,8 @@
           >
         </div>
       </div>
+       <br />
+      <br />
     </div>
   </div>
 </template>
