@@ -60,6 +60,11 @@ const router = new Router({
       path: '/kontakt',
       name: 'kontakt',
       component: Kontakt
+    },
+      
+        {
+      path: '*',
+      redirect: '/'
     }
   ]
 })
