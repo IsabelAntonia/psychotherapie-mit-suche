@@ -65,7 +65,7 @@
 					<v-btn style="align-self: center" color="primary" type="submit">Nachricht senden</v-btn>
 
 
-<p style="text-align: center !important" class="makeTextRed mt-2" v-if="missingInput">Sie müssen alle Felder ausfüllen!</p>
+<p style="text-align: center !important" class="makeTextRed mt-4" v-if="missingInput">Sie müssen alle Felder ausfüllen!</p>
 				</v-form>
 
 				<p style="text-align: center !important" id="alert" v-if="messageSent">

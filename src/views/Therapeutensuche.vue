@@ -26,7 +26,7 @@
         Wichtig: Das Adressfeld ist kein Pflichtfeld. Wenn Sie keine Adresse
         nennen, werden die Therapeuten, die Ihre Suchkriterien erfüllen
         alphabetisch sortiert angezeigt. Es besteht ebenfalls die Möglichkeit
-        statt ihrer vollen Adresse lediglich eine Postleitzahl anzugeben.
+        statt einer vollen Adresse lediglich eine Postleitzahl anzugeben.
       </p>
 
       <div class="moreMarginBottom" style="font-size: 18px">
@@ -276,7 +276,7 @@ export default {
           this.myFilter = false
           if (arrW === this.anotherArray[i]) {
             this.myFilter = true
-            // es muss nur einmal wahr sein
+            // it only has to be true once
             break
           } else {
             this.myFilter = false
@@ -322,32 +322,89 @@ export default {
         this.$router.push('/ergebnis')
       }
     },
+
+    //   checkAddress() {
+
+
+    //   var myFinalString = this.addresses.toString()
+    //   var userString = this.userAddress.toString()
+    //   fetch(
+    //     `https://maps.googleapis.com/maps/api/distancematrix/json?units=metricl&origins=${userString}&destinations=${myFinalString}&key=AIzaSyALtvhlrpPxBMx2C-j_NCIA9wk_qc6gAdg`
+    //   )
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       var realData
+    //       realData = data
+    //       if (realData.origin_addresses[0] !== '') { //did the user enter a valid address? 
+    //         this.distancesText = realData.rows[0].elements.map(
+    //           element => element.distance.text
+    //         )
+    //         this.distancesValue = realData.rows[0].elements.map(
+    //           element => element.distance.value // get the value to be able to sort 
+    //         )
+    //         var i
+    //         for (i = 0; i < this.therapeutenWithoutOrder.length; i++) {
+    //           this.therapeutenWithoutOrder[i].therapists.distanceText = this.distancesText[i]
+    //           this.therapeutenWithoutOrder[i].therapists.distanceValue = this.distancesValue[i]
+    //           // adding the properties to my unordered but filtered therapists
+    //           // not the therapeutenWithoutOrder have distanceValues to the userAddress
+    //         }
+    //         this.therapeuten = this.therapeutenWithoutOrder.sort(
+    //           (fst, snd) =>
+    //             fst.therapists.distanceValue - snd.therapists.distanceValue
+    //         )
+    //         this.$store.commit('setTherapeuten', this.therapeuten)
+    //         localStorage.setItem(
+    //           'therapeuten',
+    //           JSON.stringify(this.therapeuten)
+    //         )
+    //         this.$router.push('/ergebnis')
+    //       } else {
+    //         this.wrongInput = true
+    //       }
+    //     })
+    // },
+
+
+
+
+
     checkAddress() {
-      var myFinalString = this.addresses.toString()
-      var userString = this.userAddress.toString()
-      fetch(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?units=metricl&origins=${userString}&destinations=${myFinalString}&key=AIzaSyALtvhlrpPxBMx2C-j_NCIA9wk_qc6gAdg`
-      )
-        .then(res => res.json())
-        .then(data => {
-          var realData
-          realData = data
-          if (realData.origin_addresses[0] !== '') {
-            this.distancesText = realData.rows[0].elements.map(
+
+      
+
+var userOrigin = this.userAddress.toString();
+
+var service = new google.maps.DistanceMatrixService();
+service.getDistanceMatrix(
+  {
+    origins: [userOrigin],
+    destinations: this.addresses,
+    travelMode: 'DRIVING',
+  }, this.callback); 
+  },
+
+callback(response, status) {
+
+ 
+   
+        if (status !== google.maps.DistanceMatrixStatus.OK) {
+            console.log('Error:', status);
+        } else {
+          
+           if (response.originAddresses[0] !== '') { //did the user enter a valid address? 
+            this.distancesText = response.rows[0].elements.map(
               element => element.distance.text
             )
-            this.distancesValue = realData.rows[0].elements.map(
-              element => element.distance.value
+            this.distancesValue = response.rows[0].elements.map(
+              element => element.distance.value // get the value to be able to sort 
             )
             var i
             for (i = 0; i < this.therapeutenWithoutOrder.length; i++) {
-              this.therapeutenWithoutOrder[
-                i
-              ].therapists.distanceText = this.distancesText[i]
-              this.therapeutenWithoutOrder[
-                i
-              ].therapists.distanceValue = this.distancesValue[i]
+              this.therapeutenWithoutOrder[i].therapists.distanceText = this.distancesText[i]
+              this.therapeutenWithoutOrder[i].therapists.distanceValue = this.distancesValue[i]
               // adding the properties to my unordered but filtered therapists
+              // not the therapeutenWithoutOrder have distanceValues to the userAddress
             }
             this.therapeuten = this.therapeutenWithoutOrder.sort(
               (fst, snd) =>
@@ -362,8 +419,10 @@ export default {
           } else {
             this.wrongInput = true
           }
-        })
-    },
+            
+        }
+        
+        },
     buildAddress() {
       var j
       for (j = 0; j < this.therapeutenWithoutOrder.length; j++) {
@@ -394,6 +453,8 @@ export default {
         this.noAddress = false
       }
     }
+
+  
   }
 }
 </script>
