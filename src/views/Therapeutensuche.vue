@@ -365,7 +365,7 @@ export default {
     checkIfUserAddressExists() {
       for (var i = 0; i < this.userAddress.length; i++) {
         this.myStatus = false;
-        if (this.userAddress[i] !== "") {
+        if (this.userAddress[i].replace(/\s/g, "") != "") {
           break;
         } else {
           this.myStatus = true;
